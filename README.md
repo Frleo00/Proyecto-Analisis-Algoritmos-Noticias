@@ -1,4 +1,8 @@
 # Analizador de Noticias — Proyecto DAA
+**Integrantes:**
+Orduña Hernández Gael Neftalí
+Rivera Murillo José Manuel
+Hernandez Velazquez Ariel
 
 **Materia:** Diseño y Análisis de Algoritmos  
 **Tecnologías:** Python 3.11, CustomTkinter, feedparser, requests, NewsAPI
