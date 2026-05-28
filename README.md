@@ -1,4 +1,4 @@
-# 📰 Analizador de Noticias — Proyecto DAA
+# Analizador de Noticias — Proyecto DAA
 
 **Materia:** Diseño y Análisis de Algoritmos  
 **Tecnologías:** Python 3.11, CustomTkinter, feedparser, requests, NewsAPI
@@ -21,17 +21,17 @@ El proyecto integra conceptos de estructuras de datos, complejidad algorítmica 
 
 ---
 
-## ✨ Características Principales
+##  Características Principales
 
-- 🖥️ **Interfaz gráfica amigable** con tres pestañas:
+- **Interfaz gráfica amigable** con tres pestañas:
   - **Búsqueda:** Encuentra noticias por palabras clave, con sugerencias en tiempo real.
   - **Frecuencias:** Visualiza el top 100 de palabras más usadas con barras horizontales.
   - **Estadísticas:** Muestra total de artículos, palabras únicas, tokens y desglose por fuente.
-- 🌐 **Fuentes de datos**:
+- **Fuentes de datos**:
   - RSS: El Financiero, Expansión.
   - NewsAPI (temas de México: economía, política, noticias).
   - Datos de respaldo simulados en caso de fallo.
-- 📊 **Algoritmos implementados**:
+- **Algoritmos implementados**:
   - **Índice invertido** para búsqueda O(1) por término.
   - **Trie** para autocompletado O(m + k) (m = longitud del prefijo, k = número de sugerencias).
   - **HeapSort parcial** para obtener las palabras más frecuentes en O(n log k).
@@ -39,7 +39,7 @@ El proyecto integra conceptos de estructuras de datos, complejidad algorítmica 
 
 ---
 
-## 🛠️ Requisitos del Sistema
+## Requisitos del Sistema
 
 - **Python** 3.11 o superior.
 - **Pip** (gestor de paquetes de Python).
@@ -52,7 +52,7 @@ Dependencias principales:
 
 ---
 
-## 📦 Instrucciones de Instalación
+## Instrucciones de Instalación
 
 1. **Clona o descarga** el repositorio del proyecto.
 2. Abre una terminal en la carpeta raíz del proyecto.
@@ -60,7 +60,7 @@ Dependencias principales:
 
 ```bash
 pip install customtkinter feedparser requests
-🚀 Modo de Uso
+Modo de Uso
 
 Ejecuta la aplicación desde la terminal con:
 bash
@@ -77,7 +77,7 @@ Una vez iniciada:
 
     Pestaña Estadísticas: Revisa métricas globales y el estado de cada fuente.
 
-📁 Estructura del Proyecto
+Estructura del Proyecto
 text
 
 AnalizadorNoticias-DAA/
@@ -87,7 +87,7 @@ AnalizadorNoticias-DAA/
 ├── README.md             # Este archivo
 └── (opcional) requirements.txt
 
-📄 Licencia
+Licencia
 
 Proyecto educativo desarrollado para la materia de Diseño y Análisis de Algoritmos. Puede ser utilizado con fines académicos.
 text
