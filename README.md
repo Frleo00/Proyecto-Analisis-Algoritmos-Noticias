@@ -7,7 +7,7 @@ Aplicación de escritorio que consume noticias en español desde fuentes RSS y N
 
 ---
 
-## 📌 Descripción
+##  Descripción
 
 El **Analizador de Noticias** es una herramienta educativa que demuestra la aplicación de algoritmos clásicos de búsqueda y ordenamiento en un caso real:
 
