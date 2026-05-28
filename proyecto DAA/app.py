@@ -3,11 +3,9 @@ import threading
 import customtkinter as ctk
 from proyectoDAA import AnalizadorNoticias
 
-# ── Tema ────────────────────────────────────────────────────────────────────
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("blue")
 
-# Paleta editorial oscura
 BG_DEEP   = "#0D0F14"
 BG_CARD   = "#151820"
 BG_HOVER  = "#1C2030"
@@ -29,7 +27,6 @@ class TarjetaNoticia(ctk.CTkFrame):
 
         self.columnconfigure(0, weight=1)
 
-        # Número + fuente
         hdr = ctk.CTkFrame(self, fg_color="transparent")
         hdr.grid(row=0, column=0, sticky="ew", padx=14, pady=(12, 2))
         hdr.columnconfigure(1, weight=1)
@@ -39,20 +36,17 @@ class TarjetaNoticia(ctk.CTkFrame):
         ctk.CTkLabel(hdr, text=articulo["fuente"], font=ctk.CTkFont(size=11),
                      text_color=MUTED, anchor="e").grid(row=0, column=1, sticky="e")
 
-        # Título
         ctk.CTkLabel(self, text=articulo["titulo"],
                      font=ctk.CTkFont(size=13, weight="bold"),
                      text_color=TEXT_MAIN, wraplength=560, anchor="w",
                      justify="left").grid(row=1, column=0, sticky="ew", padx=14, pady=(2, 4))
 
-        # Resumen
         if articulo.get("resumen"):
             res = articulo["resumen"][:160] + ("…" if len(articulo["resumen"]) > 160 else "")
             ctk.CTkLabel(self, text=res, font=ctk.CTkFont(size=11),
                          text_color=TEXT_SUB, wraplength=560, anchor="w",
                          justify="left").grid(row=2, column=0, sticky="ew", padx=14, pady=(0, 6))
 
-        # Link
         link_btn = ctk.CTkButton(
             self, text=f"🔗 {articulo['link'][:65]}{'…' if len(articulo['link']) > 65 else ''}",
             font=ctk.CTkFont(size=10), text_color=ACCENT2,
@@ -121,12 +115,10 @@ class AppAnalizador(ctk.CTk):
         self._construir_ui()
         threading.Thread(target=self._cargar_datos, daemon=True).start()
 
-    # ── Construcción UI ──────────────────────────────────────────────────────
     def _construir_ui(self):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(1, weight=1)
 
-        # ── Header ──────────────────────────────────────────────────────────
         header = ctk.CTkFrame(self, fg_color=BG_CARD,
                               corner_radius=0, border_width=0)
         header.grid(row=0, column=0, sticky="ew")
@@ -142,7 +134,6 @@ class AppAnalizador(ctk.CTk):
                                         font=ctk.CTkFont(size=11), text_color=MUTED)
         self.lbl_estado.grid(row=0, column=2, padx=20)
 
-        # ── Tabs ─────────────────────────────────────────────────────────────
         self.tabs = ctk.CTkTabview(self, fg_color=BG_DEEP,
                                     segmented_button_fg_color=BG_CARD,
                                     segmented_button_selected_color=ACCENT,
@@ -161,13 +152,11 @@ class AppAnalizador(ctk.CTk):
         self._tab_frecuencias()
         self._tab_estadisticas()
 
-    # ── Tab: Búsqueda ────────────────────────────────────────────────────────
     def _tab_busqueda(self):
         tab = self.tabs.tab("🔍  Búsqueda")
         tab.grid_columnconfigure(0, weight=1)
         tab.grid_rowconfigure(2, weight=1)
 
-        # Barra de búsqueda
         barra = ctk.CTkFrame(tab, fg_color=BG_CARD, corner_radius=10,
                               border_width=1, border_color=BORDER)
         barra.grid(row=0, column=0, sticky="ew", pady=(4, 6))
@@ -202,21 +191,18 @@ class AppAnalizador(ctk.CTk):
         )
         self.lbl_sugerencias.grid(row=1, column=0, sticky="ew", padx=14, pady=(0, 8))
 
-        # Encabezado de resultados
         self.lbl_resultados_hdr = ctk.CTkLabel(
             tab, text="Escribe algo para empezar…",
             font=ctk.CTkFont(size=11), text_color=MUTED, anchor="w",
         )
         self.lbl_resultados_hdr.grid(row=1, column=0, sticky="w", pady=(0, 4))
 
-        # Scroll de tarjetas
         self.scroll_resultados = ctk.CTkScrollableFrame(
             tab, fg_color=BG_DEEP, corner_radius=8,
         )
         self.scroll_resultados.grid(row=2, column=0, sticky="nsew")
         self.scroll_resultados.grid_columnconfigure(0, weight=1)
 
-        # Placeholder inicial
         self._placeholder_label = ctk.CTkLabel(
             self.scroll_resultados,
             text="Índice invertido O(1) · Trie para autocompletado O(m+k)",
@@ -224,7 +210,6 @@ class AppAnalizador(ctk.CTk):
         )
         self._placeholder_label.grid(row=0, column=0, pady=40)
 
-    # ── Tab: Frecuencias ─────────────────────────────────────────────────────
     def _tab_frecuencias(self):
         tab = self.tabs.tab("📊  Frecuencias")
         tab.grid_columnconfigure(0, weight=1)
@@ -250,7 +235,6 @@ class AppAnalizador(ctk.CTk):
         )
         self._heap_placeholder.grid(row=0, column=0, pady=40)
 
-    # ── Tab: Estadísticas ────────────────────────────────────────────────────
     def _tab_estadisticas(self):
         tab = self.tabs.tab("📁  Estadísticas")
         tab.grid_columnconfigure((0, 1, 2), weight=1)
@@ -281,7 +265,6 @@ class AppAnalizador(ctk.CTk):
                          text_color=MUTED).grid(row=0, column=col, sticky="w",
                                                 padx=14, pady=(10, 4))
 
-    # ── Carga de datos ───────────────────────────────────────────────────────
     def _cargar_datos(self):
         self.analizador.cargar(usar_rss=True, usar_newsapi=True)
         self._cargando = False
@@ -296,7 +279,6 @@ class AppAnalizador(ctk.CTk):
         self._actualizar_heap()
         self._actualizar_estadisticas()
 
-    # ── Búsqueda ─────────────────────────────────────────────────────────────
     def _on_key(self, event):
         texto = self.entry_busqueda.get().strip()
         if self._cargando or not texto:
@@ -321,7 +303,6 @@ class AppAnalizador(ctk.CTk):
 
         resultados = self.analizador.buscar(consulta)
 
-        # Limpiar scroll
         for w in self.scroll_resultados.winfo_children():
             w.destroy()
 
@@ -344,12 +325,10 @@ class AppAnalizador(ctk.CTk):
             tarjeta = TarjetaNoticia(self.scroll_resultados, art, i + 1)
             tarjeta.grid(row=i, column=0, sticky="ew", pady=(0, 8))
 
-    # ── HeapSort ──────────────────────────────────────────────────────────────
     def _actualizar_heap(self):
         for w in self.scroll_heap.winfo_children():
             w.destroy()
 
-        # Top 100 palabras más frecuentes
         frecuencias = self.analizador.indice.frecuencias
         filtradas = sorted(frecuencias.items(), key=lambda x: x[1], reverse=True)[:100]
 
@@ -367,7 +346,6 @@ class AppAnalizador(ctk.CTk):
             barra.grid(row=i, column=0, sticky="ew", padx=14,
                        pady=(10 if i == 0 else 4, 4))
 
-    # ── Estadísticas ──────────────────────────────────────────────────────────
     def _actualizar_estadisticas(self):
         total_tokens = sum(self.analizador.indice.frecuencias.values())
         n_arts = len(self.analizador.articulos)
@@ -377,7 +355,6 @@ class AppAnalizador(ctk.CTk):
         self.badge_palabras.winfo_children()[0].configure(text=f"{n_unicas:,}")
         self.badge_tokens.winfo_children()[0].configure(text=f"{total_tokens:,}")
 
-        # Tabla de fuentes
         for fila_idx, fuente in enumerate(self.analizador.fuentes_resumen, start=1):
             ok = fuente["status"] == "ok"
             color_estado = GREEN_OK if ok else RED_ERR
@@ -400,3 +377,4 @@ class AppAnalizador(ctk.CTk):
 if __name__ == "__main__":
     app = AppAnalizador()
     app.mainloop()
+
